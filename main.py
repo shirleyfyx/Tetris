@@ -4,6 +4,7 @@ import sys
 # The structure of this game includes block class, tetromino class, tetris class and app class.
 
 
+
 class App:
     def __init__(self):
         pg.init()
