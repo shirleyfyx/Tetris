@@ -17,6 +17,12 @@ class Block(pg.sprite.Sprite):
     def update(self):
         self.set_rect_pos()
 
+    def is_collide(self, pos):
+        x, y = int(pos.x), int(pos.y)
+        if 0 <= x < FIELD_W and y < FIELD_H:
+            return False
+        return True
+
 class Tetromino:
     def __init__(self,tetris):
         self.tetris = tetris
@@ -24,10 +30,17 @@ class Tetromino:
         #Generating randome tetrimino. 
         self.blocks = [Block(self, pos) for pos in TETROMINOES[self.shape]]
 
+    def is_collide(self,block_positions):
+        return any(map(Block.is_collide, self.blocks, block_positions))
+
     def move(self, direction):
         move_direction = MOVE_DIRECTION[direction]
-        for block in self.blocks:
-            block.pos += move_direction
+        new_block_positions = [block.pos + move_direction for block in self.blocks]
+        is_collide = self.is_collide(new_block_positions)
+
+        if not is_collide:
+            for block in self.blocks:
+                block.pos += move_direction
 
     def update(self):
         self.move(direction='down')
