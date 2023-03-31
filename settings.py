@@ -7,6 +7,7 @@ FIELD_COLOR = (48, 39, 32)
 BG_COLOR = (24, 89, 117)
 
 SPRITE_DIR_PATH = 'assets/blocks'
+FONT_PATH = 'assets/fonts/FREAKSOFNATUREMASSIVE.ttf'
 
 ANIM_TIME_INTERVAL = 150 #milliseconds
 FAST_ANIM_TIME_INTERVAL = 25 #milliseconds

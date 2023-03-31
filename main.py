@@ -1,5 +1,5 @@
 from settings import *
-from tetris import Tetris
+from tetris import Tetris, TEXT
 import sys
 import pathlib
 
@@ -14,6 +14,7 @@ class App:
         self.set_timer()
         self.images = self.load_images()
         self.tetris = Tetris(self)
+        self.text = TEXT(self)
 
     def load_images(self):
         files = [item for item in pathlib.Path(SPRITE_DIR_PATH).rglob('*.png') if item.is_file()]
@@ -39,6 +40,7 @@ class App:
         self.screen.fill(color=BG_COLOR)
         self.screen.fill(color = FIELD_COLOR, rect=(0, 0, *FIELD_RES))
         self.tetris.draw()
+        self.text.draw()
         pg.display.flip()
 
     def check_events(self):
