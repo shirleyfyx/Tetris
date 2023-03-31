@@ -38,17 +38,28 @@ class Tetris:
     def get_field_array(self):
         return [[0 for x in range(FIELD_W)] for y in range(FIELD_H)]
 
+    def is_game_over(self):
+        if self.tetromino.blocks[0].pos.y == INIT_POS_OFFSET[1]:
+            pg.time.wait(300)
+            return True
+        # Check if the y coordinate of the block and the initial position are the same. 
+        # If the same, means the block is not moving any more and the entire field is filled.
+
     def check_tetromino_landing(self):
         if self.tetromino.landing:
-            self.speed_up = False
-            self.put_tetromino_blocks_in_array()
-            self.next_tetronimo.current = True
-            self.tetromino = self.next_tetronimo
-            self.next_tetronimo = Tetromino(self, current = False)
-            # Assign the next tetromino to the side for planning. 
+            if self.is_game_over():
+                self.__init__(self.app)
+                # Restart the game.
+            else:
+                self.speed_up = False
+                self.put_tetromino_blocks_in_array()
+                self.next_tetronimo.current = True
+                self.tetromino = self.next_tetronimo
+                self.next_tetronimo = Tetromino(self, current = False)
+                # Assign the next tetromino to the side for planning. 
 
-            #self.tetromino = Tetromino(self) 
-            # Check if the tetromino has landed, if landed, create a new tetromino. 
+                #self.tetromino = Tetromino(self) 
+                # Check if the tetromino has landed, if landed, create a new tetromino. 
 
     def control(self, pressed_key):
         if pressed_key == pg.K_LEFT:
