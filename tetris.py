@@ -13,7 +13,9 @@ class Tetris:
         for block in self.tetromino.blocks:
             x, y = int(block.pos.x), int(block.pos.y)
             self.field_array[y][x] = block
-
+        # for row in self.field_array:
+        #     print(row)
+        
     def get_field_array(self):
         return [[0 for x in range(FIELD_W)] for y in range(FIELD_H)]
 
@@ -21,12 +23,15 @@ class Tetris:
         if self.tetromino.landing:
             self.put_tetromino_blocks_in_array()
             self.tetromino = Tetromino(self)
+        # Check if the tetromino has landed, if landed, create a new tetromino. 
 
     def control(self, pressed_key):
         if pressed_key == pg.K_LEFT:
             self.tetromino.move(direction = 'left')
         elif pressed_key == pg.K_RIGHT:
             self.tetromino.move(direction='right')
+        elif pressed_key == pg.K_UP:
+            self.tetromino.rotate()
     
     def draw_grid(self):
         for x in range(FIELD_W):
