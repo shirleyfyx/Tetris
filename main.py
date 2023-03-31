@@ -44,8 +44,7 @@ class App:
             self.check_events()
             self.update()
             self.draw()
-
-
+            
 if __name__ == '__main__':
     app = App()
     app.run()

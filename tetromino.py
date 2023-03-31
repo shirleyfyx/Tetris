@@ -19,7 +19,8 @@ class Block(pg.sprite.Sprite):
 
     def is_collide(self, pos):
         x, y = int(pos.x), int(pos.y)
-        if 0 <= x < FIELD_W and y < FIELD_H:
+        if 0 <= x < FIELD_W and y < FIELD_H and (
+            y < 0 or not self.tetromino.tetris.field_array[y][x]):
             return False
         return True
 
@@ -29,6 +30,7 @@ class Tetromino:
         self.shape = random.choice(list(TETROMINOES.keys()))
         #Generating randome tetrimino. 
         self.blocks = [Block(self, pos) for pos in TETROMINOES[self.shape]]
+        self.landing = False
 
     def is_collide(self,block_positions):
         return any(map(Block.is_collide, self.blocks, block_positions))
@@ -41,6 +43,8 @@ class Tetromino:
         if not is_collide:
             for block in self.blocks:
                 block.pos += move_direction
+        elif direction == 'down':
+            self.landing = True
 
     def update(self):
         self.move(direction='down')
