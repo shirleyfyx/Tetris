@@ -8,6 +8,7 @@ class Tetris:
         self.sprite_group = pg.sprite.Group()
         self.field_array = self.get_field_array()
         self.tetromino = Tetromino(self)
+        self.next_tetronimo = Tetromino(self, current=False)
         self.speed_up = False
 
     def check_full_lines(self):
@@ -41,8 +42,13 @@ class Tetris:
         if self.tetromino.landing:
             self.speed_up = False
             self.put_tetromino_blocks_in_array()
-            self.tetromino = Tetromino(self)
-        # Check if the tetromino has landed, if landed, create a new tetromino. 
+            self.next_tetronimo.current = True
+            self.tetromino = self.next_tetronimo
+            self.next_tetronimo = Tetromino(self, current = False)
+            # Assign the next tetromino to the side for planning. 
+
+            #self.tetromino = Tetromino(self) 
+            # Check if the tetromino has landed, if landed, create a new tetromino. 
 
     def control(self, pressed_key):
         if pressed_key == pg.K_LEFT:
