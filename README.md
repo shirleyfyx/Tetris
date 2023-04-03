@@ -17,7 +17,7 @@ To play the game, make sure you have Python 3 installed on your computer. You ca
 <p> Use the left and right arrow keys to move the tetromino sideways.
 <p> Use the up arrow key to rotate the tetromino.
 <p> Use the down arrow key to make the tetromino fall faster.
-<p> Use the space bar to instantly drop the tetromino to the bottom.
+<p> Plan your next move with the "next" tetronimo on the right.
 <p> The game will restart when the tetromino stack reaches the top of the screen.
 
 ![Tetris Project](https://user-images.githubusercontent.com/109609935/229643672-0bc88b18-1785-4c4a-8edc-6762ac6813ea.jpg)
